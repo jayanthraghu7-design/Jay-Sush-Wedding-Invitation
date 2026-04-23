@@ -31,28 +31,29 @@ body {
   cursor: pointer;
 }
 
-/* Names */
 .names {
   font-family: 'Great Vibes', cursive;
-  font-size: 40px;
+  font-size: 42px;
 }
 
 /* Image */
 .full-img {
   width: 100%;
+  display: block;
 }
 
-/* Section */
+/* Sections */
 .section {
-  padding: 40px 20px;
+  padding: 50px 20px;
 }
 
 /* Cards */
 .card {
   background: white;
-  margin: 20px;
+  margin: 20px auto;
   padding: 20px;
   border-radius: 15px;
+  max-width: 400px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   animation: fadeUp 1s ease;
 }
@@ -61,6 +62,7 @@ body {
 .countdown {
   font-size: 26px;
   color: #a52a2a;
+  margin-top: 10px;
 }
 
 /* Button */
@@ -70,6 +72,8 @@ body {
   padding: 12px 20px;
   border-radius: 8px;
   text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
 }
 
 /* Animation */
@@ -82,19 +86,16 @@ body {
 .flower {
   position: fixed;
   top: -50px;
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
   background: pink;
   border-radius: 50%;
   animation: fall linear infinite;
 }
 
 @keyframes fall {
-  to {
-    transform: translateY(100vh);
-  }
+  to { transform: translateY(100vh); }
 }
-
 </style>
 </head>
 
@@ -108,15 +109,15 @@ body {
 
 <!-- MUSIC -->
 <audio id="music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
 </audio>
 
-<!-- IMAGE -->
+<!-- INVITATION IMAGE -->
 <img src="invitation.png" class="full-img">
 
 <!-- COUNTDOWN -->
 <div class="section">
-  <h2>Countdown to Our Big Day</h2>
+  <h2>Countdown to Our Wedding</h2>
   <div id="countdown" class="countdown"></div>
 </div>
 
@@ -126,12 +127,14 @@ body {
 
   <div class="card">
     <h3>Reception</h3>
-    <p>10 May 2026 – 7 PM</p>
+    <p>10 May 2026</p>
+    <p>7:00 PM onwards</p>
   </div>
 
   <div class="card">
     <h3>Muhurtham</h3>
-    <p>11 May 2026 – 10:00 AM</p>
+    <p>11 May 2026</p>
+    <p>10:00 AM – 10:25 AM</p>
   </div>
 </div>
 
@@ -139,9 +142,10 @@ body {
 <div class="section">
   <h2>Venue</h2>
   <p>Kaveri Kalyan Mantapa</p>
+  <p>Doddaballapur, Bengaluru Rural</p>
 
   <a class="btn" href="https://maps.google.com/?q=Kaveri Kalyan Mantapa" target="_blank">
-    View Map
+    View Location
   </a>
 </div>
 
@@ -170,15 +174,13 @@ setInterval(() => {
 
 // FLOWERS
 setInterval(() => {
-  let flower = document.createElement("div");
-  flower.className = "flower";
-  flower.style.left = Math.random() * window.innerWidth + "px";
-  flower.style.animationDuration = (3 + Math.random() * 5) + "s";
-  document.body.appendChild(flower);
+  let f = document.createElement("div");
+  f.className = "flower";
+  f.style.left = Math.random() * window.innerWidth + "px";
+  f.style.animationDuration = (3 + Math.random() * 5) + "s";
+  document.body.appendChild(f);
 
-  setTimeout(() => {
-    flower.remove();
-  }, 8000);
+  setTimeout(() => f.remove(), 8000);
 }, 300);
 
 </script>
