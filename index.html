@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jayanth ❤️ Sushma Wedding</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #fdf6ec;
+  background: linear-gradient(#fffaf5, #fdf6ec);
   text-align: center;
   overflow-x: hidden;
 }
@@ -21,7 +21,7 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: black;
+  background: radial-gradient(circle, #000, #222);
   color: white;
   display: flex;
   justify-content: center;
@@ -29,11 +29,19 @@ body {
   flex-direction: column;
   z-index: 999;
   cursor: pointer;
+  transition: opacity 1s;
 }
 
 .names {
   font-family: 'Great Vibes', cursive;
-  font-size: 42px;
+  font-size: 48px;
+  letter-spacing: 2px;
+}
+
+.tag {
+  font-family: 'Playfair Display';
+  font-size: 16px;
+  opacity: 0.8;
 }
 
 /* Image */
@@ -42,59 +50,71 @@ body {
   display: block;
 }
 
-/* Sections */
+/* Section */
 .section {
-  padding: 50px 20px;
+  padding: 60px 20px;
+  animation: fadeUp 1.2s ease;
 }
 
 /* Cards */
 .card {
   background: white;
   margin: 20px auto;
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 400px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  animation: fadeUp 1s ease;
+  padding: 25px;
+  border-radius: 18px;
+  max-width: 420px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  border: 1px solid #f0e4d7;
+}
+
+/* Headings */
+h2 {
+  font-family: 'Playfair Display';
+  color: #8b0000;
 }
 
 /* Countdown */
 .countdown {
-  font-size: 26px;
-  color: #a52a2a;
+  font-size: 28px;
+  color: #b8860b;
   margin-top: 10px;
+  font-weight: bold;
 }
 
 /* Button */
 .btn {
-  background: #a52a2a;
+  background: linear-gradient(45deg, #a52a2a, #d4af37);
   color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 12px 22px;
+  border-radius: 30px;
   text-decoration: none;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 15px;
+  font-weight: bold;
 }
 
 /* Animation */
 @keyframes fadeUp {
-  from {opacity: 0; transform: translateY(40px);}
+  from {opacity: 0; transform: translateY(50px);}
   to {opacity: 1; transform: translateY(0);}
 }
 
-/* Falling flowers */
-.flower {
+/* Petals */
+.petal {
   position: fixed;
-  top: -50px;
+  top: -20px;
   width: 12px;
   height: 12px;
-  background: pink;
-  border-radius: 50%;
+  background: radial-gradient(circle, pink, #ffb6c1);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
   animation: fall linear infinite;
 }
 
 @keyframes fall {
-  to { transform: translateY(100vh); }
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
 }
 </style>
 </head>
@@ -104,7 +124,8 @@ body {
 <!-- OPEN SCREEN -->
 <div id="overlay" onclick="openInvite()">
   <h1 class="names">Jayanth ❤️ Sushma</h1>
-  <p>Tap to Open Invitation</p>
+  <p class="tag">Together with their families invite you</p>
+  <p>Tap to Open</p>
 </div>
 
 <!-- MUSIC -->
@@ -151,10 +172,15 @@ body {
 
 <script>
 
-// OPEN INVITE + MUSIC
+// OPEN + MUSIC FADE
 function openInvite() {
-  document.getElementById("overlay").style.display = "none";
-  document.getElementById("music").play();
+  let overlay = document.getElementById("overlay");
+  overlay.style.opacity = "0";
+  setTimeout(() => overlay.style.display = "none", 1000);
+
+  let music = document.getElementById("music");
+  music.volume = 0.2;
+  music.play();
 }
 
 // COUNTDOWN
@@ -172,16 +198,16 @@ setInterval(() => {
     d + " Days " + h + " Hrs " + m + " Min";
 }, 1000);
 
-// FLOWERS
+// PETALS
 setInterval(() => {
-  let f = document.createElement("div");
-  f.className = "flower";
-  f.style.left = Math.random() * window.innerWidth + "px";
-  f.style.animationDuration = (3 + Math.random() * 5) + "s";
-  document.body.appendChild(f);
+  let p = document.createElement("div");
+  p.className = "petal";
+  p.style.left = Math.random() * window.innerWidth + "px";
+  p.style.animationDuration = (4 + Math.random() * 4) + "s";
+  document.body.appendChild(p);
 
-  setTimeout(() => f.remove(), 8000);
-}, 300);
+  setTimeout(() => p.remove(), 8000);
+}, 250);
 
 </script>
 
