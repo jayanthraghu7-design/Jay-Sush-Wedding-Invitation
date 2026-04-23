@@ -29,17 +29,19 @@ body {
   cursor: pointer;
 }
 
-/* Hero Image */
-.hero {
-  background: url('invitation.png') no-repeat center/cover;
-  height: 100vh;
+/* FULL IMAGE FIX */
+.full-img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* Section */
+/* Sections */
 .section {
   padding: 40px 20px;
 }
 
+/* Cards */
 .card {
   background: white;
   padding: 20px;
@@ -55,29 +57,39 @@ body {
   color: #b8860b;
 }
 
+/* Button */
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #8b0000;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 10px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- Opening -->
+<!-- OPEN SCREEN -->
 <div id="overlay" onclick="openInvite()">
   <h1>Jayanth ❤️ Sushma</h1>
   <p>Tap to Open Invitation</p>
 </div>
 
-<!-- Hero -->
-<div class="hero"></div>
+<!-- FULL INVITATION IMAGE -->
+<img src="invitation.png" class="full-img">
 
-<!-- Countdown -->
+<!-- COUNTDOWN -->
 <div class="section">
-  <h2>Wedding Countdown</h2>
+  <h2>Countdown to Our Big Day</h2>
   <div id="countdown" class="countdown"></div>
 </div>
 
-<!-- Events -->
+<!-- EVENTS -->
 <div class="section">
-  <h2>Events</h2>
+  <h2>Wedding Events</h2>
 
   <div class="card">
     <h3>Reception</h3>
@@ -92,26 +104,24 @@ body {
   </div>
 </div>
 
-<!-- Venue -->
+<!-- VENUE -->
 <div class="section">
   <h2>Venue</h2>
   <p>Kaveri Kalyan Mantapa</p>
   <p>Doddaballapur, Bengaluru Rural</p>
 
-  <iframe 
-    src="https://maps.google.com/maps?q=Kaveri%20Kalyan%20Mantapa&t=&z=13&ie=UTF8&iwloc=&output=embed"
-    width="90%" height="300" style="border:0;">
-  </iframe>
+  <a class="btn" href="https://maps.google.com/?q=Kaveri Kalyan Mantapa" target="_blank">
+    View on Map
+  </a>
 </div>
 
 <script>
-
-// Open animation
+// OPEN INVITE
 function openInvite() {
   document.getElementById("overlay").style.display = "none";
 }
 
-// Countdown
+// COUNTDOWN
 const weddingDate = new Date("May 11, 2026 10:00:00").getTime();
 
 setInterval(() => {
@@ -123,9 +133,8 @@ setInterval(() => {
   let minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
 
   document.getElementById("countdown").innerHTML =
-    days + "d " + hours + "h " + minutes + "m";
+    days + " days " + hours + " hrs " + minutes + " mins";
 }, 1000);
-
 </script>
 
 </body>
