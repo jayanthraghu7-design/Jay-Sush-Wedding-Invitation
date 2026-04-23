@@ -5,21 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jayanth ❤️ Sushma Wedding</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
-  font-family: 'Georgia', serif;
-  background: #f8f3e8;
+  font-family: 'Poppins', sans-serif;
+  background: #fdf6ec;
   text-align: center;
-  color: #5a2d0c;
+  overflow-x: hidden;
 }
 
-/* Opening Screen */
+/* Overlay */
 #overlay {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: #000;
+  background: black;
   color: white;
   display: flex;
   justify-content: center;
@@ -29,14 +31,18 @@ body {
   cursor: pointer;
 }
 
-/* FULL IMAGE FIX */
-.full-img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* Names */
+.names {
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px;
 }
 
-/* Sections */
+/* Image */
+.full-img {
+  width: 100%;
+}
+
+/* Section */
 .section {
   padding: 40px 20px;
 }
@@ -44,29 +50,51 @@ body {
 /* Cards */
 .card {
   background: white;
-  padding: 20px;
   margin: 20px;
+  padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  animation: fadeUp 1s ease;
 }
 
 /* Countdown */
 .countdown {
-  font-size: 24px;
-  margin-top: 10px;
-  color: #b8860b;
+  font-size: 26px;
+  color: #a52a2a;
 }
 
 /* Button */
 .btn {
-  display: inline-block;
-  padding: 12px 20px;
-  background: #8b0000;
+  background: #a52a2a;
   color: white;
+  padding: 12px 20px;
   border-radius: 8px;
   text-decoration: none;
-  margin-top: 10px;
 }
+
+/* Animation */
+@keyframes fadeUp {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Falling flowers */
+.flower {
+  position: fixed;
+  top: -50px;
+  width: 20px;
+  height: 20px;
+  background: pink;
+  border-radius: 50%;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
 </style>
 </head>
 
@@ -74,11 +102,16 @@ body {
 
 <!-- OPEN SCREEN -->
 <div id="overlay" onclick="openInvite()">
-  <h1>Jayanth ❤️ Sushma</h1>
+  <h1 class="names">Jayanth ❤️ Sushma</h1>
   <p>Tap to Open Invitation</p>
 </div>
 
-<!-- FULL INVITATION IMAGE -->
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+</audio>
+
+<!-- IMAGE -->
 <img src="invitation.png" class="full-img">
 
 <!-- COUNTDOWN -->
@@ -93,14 +126,12 @@ body {
 
   <div class="card">
     <h3>Reception</h3>
-    <p>Saturday, 10 May 2026</p>
-    <p>7 PM onwards</p>
+    <p>10 May 2026 – 7 PM</p>
   </div>
 
   <div class="card">
     <h3>Muhurtham</h3>
-    <p>Monday, 11 May 2026</p>
-    <p>10:00 AM – 10:25 AM</p>
+    <p>11 May 2026 – 10:00 AM</p>
   </div>
 </div>
 
@@ -108,17 +139,18 @@ body {
 <div class="section">
   <h2>Venue</h2>
   <p>Kaveri Kalyan Mantapa</p>
-  <p>Doddaballapur, Bengaluru Rural</p>
 
   <a class="btn" href="https://maps.google.com/?q=Kaveri Kalyan Mantapa" target="_blank">
-    View on Map
+    View Map
   </a>
 </div>
 
 <script>
-// OPEN INVITE
+
+// OPEN INVITE + MUSIC
 function openInvite() {
   document.getElementById("overlay").style.display = "none";
+  document.getElementById("music").play();
 }
 
 // COUNTDOWN
@@ -128,13 +160,27 @@ setInterval(() => {
   let now = new Date().getTime();
   let gap = weddingDate - now;
 
-  let days = Math.floor(gap / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+  let d = Math.floor(gap / (1000 * 60 * 60 * 24));
+  let h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
 
   document.getElementById("countdown").innerHTML =
-    days + " days " + hours + " hrs " + minutes + " mins";
+    d + " Days " + h + " Hrs " + m + " Min";
 }, 1000);
+
+// FLOWERS
+setInterval(() => {
+  let flower = document.createElement("div");
+  flower.className = "flower";
+  flower.style.left = Math.random() * window.innerWidth + "px";
+  flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+  document.body.appendChild(flower);
+
+  setTimeout(() => {
+    flower.remove();
+  }, 8000);
+}, 300);
+
 </script>
 
 </body>
