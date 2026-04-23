@@ -13,6 +13,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #fdf6ec;
   text-align: center;
+  overflow-x: hidden;
 }
 
 /* Overlay */
@@ -33,7 +34,7 @@ body {
 /* Names */
 .names {
   font-family: 'Great Vibes', cursive;
-  font-size: 42px;
+  font-size: 40px;
 }
 
 /* Image */
@@ -43,7 +44,7 @@ body {
 
 /* Section */
 .section {
-  padding: 50px 20px;
+  padding: 40px 20px;
 }
 
 /* Cards */
@@ -53,6 +54,7 @@ body {
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  animation: fadeUp 1s ease;
 }
 
 /* Countdown */
@@ -68,39 +70,31 @@ body {
   padding: 12px 20px;
   border-radius: 8px;
   text-decoration: none;
-  border: none;
 }
 
-/* Gallery */
-.gallery img {
-  width: 90%;
-  margin: 10px;
-  border-radius: 10px;
+/* Animation */
+@keyframes fadeUp {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
-/* RSVP */
-input, select {
-  padding: 10px;
-  margin: 10px;
-  width: 80%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-/* Flower */
+/* Falling flowers */
 .flower {
   position: fixed;
   top: -50px;
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   background: pink;
   border-radius: 50%;
   animation: fall linear infinite;
 }
 
 @keyframes fall {
-  to { transform: translateY(100vh); }
+  to {
+    transform: translateY(100vh);
+  }
 }
+
 </style>
 </head>
 
@@ -109,12 +103,12 @@ input, select {
 <!-- OPEN SCREEN -->
 <div id="overlay" onclick="openInvite()">
   <h1 class="names">Jayanth ❤️ Sushma</h1>
-  <p>Tap to Enter</p>
+  <p>Tap to Open Invitation</p>
 </div>
 
 <!-- MUSIC -->
 <audio id="music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
 </audio>
 
 <!-- IMAGE -->
@@ -122,13 +116,13 @@ input, select {
 
 <!-- COUNTDOWN -->
 <div class="section">
-  <h2>Countdown</h2>
+  <h2>Countdown to Our Big Day</h2>
   <div id="countdown" class="countdown"></div>
 </div>
 
 <!-- EVENTS -->
 <div class="section">
-  <h2>Events</h2>
+  <h2>Wedding Events</h2>
 
   <div class="card">
     <h3>Reception</h3>
@@ -137,30 +131,8 @@ input, select {
 
   <div class="card">
     <h3>Muhurtham</h3>
-    <p>11 May 2026 – 10 AM</p>
+    <p>11 May 2026 – 10:00 AM</p>
   </div>
-</div>
-
-<!-- GALLERY -->
-<div class="section gallery">
-  <h2>Our Moments</h2>
-  <img src="invitation.png">
-  <img src="invitation.png">
-</div>
-
-<!-- RSVP -->
-<div class="section">
-  <h2>RSVP</h2>
-
-  <input type="text" placeholder="Your Name"><br>
-  <select>
-    <option>Will you attend?</option>
-    <option>Yes</option>
-    <option>No</option>
-  </select><br>
-
-  <button class="btn" onclick="submitRSVP()">Submit</button>
-  <p id="msg"></p>
 </div>
 
 <!-- VENUE -->
@@ -169,47 +141,44 @@ input, select {
   <p>Kaveri Kalyan Mantapa</p>
 
   <a class="btn" href="https://maps.google.com/?q=Kaveri Kalyan Mantapa" target="_blank">
-    Open Map
+    View Map
   </a>
 </div>
 
 <script>
 
-// OPEN
+// OPEN INVITE + MUSIC
 function openInvite() {
   document.getElementById("overlay").style.display = "none";
   document.getElementById("music").play();
 }
 
 // COUNTDOWN
-const date = new Date("May 11, 2026 10:00:00").getTime();
+const weddingDate = new Date("May 11, 2026 10:00:00").getTime();
 
 setInterval(() => {
   let now = new Date().getTime();
-  let gap = date - now;
+  let gap = weddingDate - now;
 
-  let d = Math.floor(gap/(1000*60*60*24));
-  let h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
-  let m = Math.floor((gap%(1000*60*60))/(1000*60));
+  let d = Math.floor(gap / (1000 * 60 * 60 * 24));
+  let h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
 
   document.getElementById("countdown").innerHTML =
-    d+" Days "+h+" Hrs "+m+" Min";
+    d + " Days " + h + " Hrs " + m + " Min";
 }, 1000);
-
-// RSVP
-function submitRSVP() {
-  document.getElementById("msg").innerText = "Thank you! 💖";
-}
 
 // FLOWERS
 setInterval(() => {
-  let f = document.createElement("div");
-  f.className = "flower";
-  f.style.left = Math.random()*window.innerWidth + "px";
-  f.style.animationDuration = (3 + Math.random()*5) + "s";
-  document.body.appendChild(f);
+  let flower = document.createElement("div");
+  flower.className = "flower";
+  flower.style.left = Math.random() * window.innerWidth + "px";
+  flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+  document.body.appendChild(flower);
 
-  setTimeout(()=>f.remove(), 8000);
+  setTimeout(() => {
+    flower.remove();
+  }, 8000);
 }, 300);
 
 </script>
